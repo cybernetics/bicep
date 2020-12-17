@@ -214,16 +214,124 @@
   {
     "name": "resourceId",
     "description": "Returns the unique identifier of a resource. You use this function when the resource name is ambiguous or not provisioned within the same template. The format of the returned identifier varies based on whether the deployment happens at the scope of a resource group, subscription, management group, or tenant.",
-    "fixedParameters": [],
+    "fixedParameters": [
+      {
+        "name": "resourceType",
+        "description": "Type of resource including resource provider namespace",
+        "type": "string",
+        "required": true
+      }
+    ],
     "minimumArgumentCount": 2,
     "variableParameter": {
-      "namePrefix": "arg",
-      "description": "",
+      "namePrefix": "resourceName",
+      "description": "The resource name segment",
       "type": "string"
     },
     "flags": "default",
-    "typeSignature": "(... : string): string",
+    "typeSignature": "(resourceType: string, ... : string): string",
     "parameterTypeSignatures": [
+      "resourceType: string",
+      "... : string"
+    ]
+  },
+  {
+    "name": "resourceId",
+    "description": "Returns the unique identifier of a resource. You use this function when the resource name is ambiguous or not provisioned within the same template. The format of the returned identifier varies based on whether the deployment happens at the scope of a resource group, subscription, management group, or tenant.",
+    "fixedParameters": [
+      {
+        "name": "subscriptionId",
+        "description": "The subscription ID",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "resourceType",
+        "description": "Type of resource including resource provider namespace",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "minimumArgumentCount": 3,
+    "variableParameter": {
+      "namePrefix": "resourceName",
+      "description": "The resource name segment",
+      "type": "string"
+    },
+    "flags": "default",
+    "typeSignature": "(subscriptionId: string, resourceType: string, ... : string): string",
+    "parameterTypeSignatures": [
+      "subscriptionId: string",
+      "resourceType: string",
+      "... : string"
+    ]
+  },
+  {
+    "name": "resourceId",
+    "description": "Returns the unique identifier of a resource. You use this function when the resource name is ambiguous or not provisioned within the same template. The format of the returned identifier varies based on whether the deployment happens at the scope of a resource group, subscription, management group, or tenant.",
+    "fixedParameters": [
+      {
+        "name": "resourceGroupName",
+        "description": "The resource group name",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "resourceType",
+        "description": "Type of resource including resource provider namespace",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "minimumArgumentCount": 3,
+    "variableParameter": {
+      "namePrefix": "resourceName",
+      "description": "The resource name segment",
+      "type": "string"
+    },
+    "flags": "default",
+    "typeSignature": "(resourceGroupName: string, resourceType: string, ... : string): string",
+    "parameterTypeSignatures": [
+      "resourceGroupName: string",
+      "resourceType: string",
+      "... : string"
+    ]
+  },
+  {
+    "name": "resourceId",
+    "description": "Returns the unique identifier of a resource. You use this function when the resource name is ambiguous or not provisioned within the same template. The format of the returned identifier varies based on whether the deployment happens at the scope of a resource group, subscription, management group, or tenant.",
+    "fixedParameters": [
+      {
+        "name": "subscriptionId",
+        "description": "The subscription ID",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "resourceGroupName",
+        "description": "The resource group name",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "resourceType",
+        "description": "Type of resource including resource provider namespace",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "minimumArgumentCount": 4,
+    "variableParameter": {
+      "namePrefix": "resourceName",
+      "description": "The resource name segment",
+      "type": "string"
+    },
+    "flags": "default",
+    "typeSignature": "(subscriptionId: string, resourceGroupName: string, resourceType: string, ... : string): string",
+    "parameterTypeSignatures": [
+      "subscriptionId: string",
+      "resourceGroupName: string",
+      "resourceType: string",
       "... : string"
     ]
   },
@@ -259,16 +367,55 @@
   {
     "name": "subscriptionResourceId",
     "description": "Returns the unique identifier for a resource deployed at the subscription level.",
-    "fixedParameters": [],
+    "fixedParameters": [
+      {
+        "name": "resourceType",
+        "description": "Type of resource including resource provider namespace",
+        "type": "string",
+        "required": true
+      }
+    ],
     "minimumArgumentCount": 2,
     "variableParameter": {
-      "namePrefix": "arg",
-      "description": "",
+      "namePrefix": "resourceName",
+      "description": "The resource name segment",
       "type": "string"
     },
     "flags": "default",
-    "typeSignature": "(... : string): string",
+    "typeSignature": "(resourceType: string, ... : string): string",
     "parameterTypeSignatures": [
+      "resourceType: string",
+      "... : string"
+    ]
+  },
+  {
+    "name": "subscriptionResourceId",
+    "description": "Returns the unique identifier for a resource deployed at the subscription level.",
+    "fixedParameters": [
+      {
+        "name": "subscriptionId",
+        "description": "The subscription ID",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "resourceType",
+        "description": "Type of resource including resource provider namespace",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "minimumArgumentCount": 3,
+    "variableParameter": {
+      "namePrefix": "resourceName",
+      "description": "The resource name segment",
+      "type": "string"
+    },
+    "flags": "default",
+    "typeSignature": "(subscriptionId: string, resourceType: string, ... : string): string",
+    "parameterTypeSignatures": [
+      "subscriptionId: string",
+      "resourceType: string",
       "... : string"
     ]
   },

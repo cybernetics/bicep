@@ -216,19 +216,58 @@ namespace Bicep.Core.Semantics.Namespaces
                 .WithDescription("Returns information about the Azure environment used for deployment.")
                 .Build();
 
-            // TODO: Handle leading optional parameters and add proper names for parameters
             // TODO: This is based on docs. Verify
+            // the resourceId function relies on leading optional parameters that are disambiguated at runtime
+            // modeling this as multiple overload with all possible permutations of the leading parameters
+            const string resourceIdDescription = "Returns the unique identifier of a resource. You use this function when the resource name is ambiguous or not provisioned within the same template. The format of the returned identifier varies based on whether the deployment happens at the scope of a resource group, subscription, management group, or tenant.";
             yield return new FunctionOverloadBuilder("resourceId")
                 .WithReturnType(LanguageConstants.String)
-                .WithDescription("Returns the unique identifier of a resource. You use this function when the resource name is ambiguous or not provisioned within the same template. The format of the returned identifier varies based on whether the deployment happens at the scope of a resource group, subscription, management group, or tenant.")
-                .WithVariableParameter("arg", LanguageConstants.String, minimumCount: 2, string.Empty)
+                .WithDescription(resourceIdDescription)
+                .WithRequiredParameter("resourceType", LanguageConstants.String, "Type of resource including resource provider namespace")
+                .WithVariableParameter("resourceName", LanguageConstants.String, minimumCount: 1, "The resource name segment")
                 .Build();
 
-            // TODO: Handle leading optional parameters and add proper names for parameters
+            yield return new FunctionOverloadBuilder("resourceId")
+                .WithReturnType(LanguageConstants.String)
+                .WithDescription(resourceIdDescription)
+                .WithRequiredParameter("subscriptionId", LanguageConstants.String, "The subscription ID")
+                .WithRequiredParameter("resourceType", LanguageConstants.String, "Type of resource including resource provider namespace")
+                .WithVariableParameter("resourceName", LanguageConstants.String, minimumCount: 1, "The resource name segment")
+                .Build(); 
+            
+            yield return new FunctionOverloadBuilder("resourceId")
+                .WithReturnType(LanguageConstants.String)
+                .WithDescription(resourceIdDescription)
+                .WithRequiredParameter("resourceGroupName", LanguageConstants.String, "The resource group name")
+                .WithRequiredParameter("resourceType", LanguageConstants.String, "Type of resource including resource provider namespace")
+                .WithVariableParameter("resourceName", LanguageConstants.String, minimumCount: 1, "The resource name segment")
+                .Build();
+
+            yield return new FunctionOverloadBuilder("resourceId")
+                .WithReturnType(LanguageConstants.String)
+                .WithDescription(resourceIdDescription)
+                .WithRequiredParameter("subscriptionId", LanguageConstants.String, "The subscription ID")
+                .WithRequiredParameter("resourceGroupName", LanguageConstants.String, "The resource group name")
+                .WithRequiredParameter("resourceType", LanguageConstants.String, "Type of resource including resource provider namespace")
+                .WithVariableParameter("resourceName", LanguageConstants.String, minimumCount: 1, "The resource name segment")
+                .Build();
+
+            // the subscriptionResourceId function relies on leading optional parameters that are disambiguated at runtime
+            // modeling this as multiple overload with all possible permutations of the leading parameters
+            const string subscriptionResourceIdDescription = "Returns the unique identifier for a resource deployed at the subscription level.";
             yield return new FunctionOverloadBuilder("subscriptionResourceId")
                 .WithReturnType(LanguageConstants.String)
-                .WithDescription("Returns the unique identifier for a resource deployed at the subscription level.")
-                .WithVariableParameter("arg",LanguageConstants.String, minimumCount: 2, string.Empty)
+                .WithDescription(subscriptionResourceIdDescription)
+                .WithRequiredParameter("resourceType", LanguageConstants.String, "Type of resource including resource provider namespace")
+                .WithVariableParameter("resourceName", LanguageConstants.String, minimumCount: 1, "The resource name segment")
+                .Build();
+
+            yield return new FunctionOverloadBuilder("subscriptionResourceId")
+                .WithReturnType(LanguageConstants.String)
+                .WithDescription(subscriptionResourceIdDescription)
+                .WithRequiredParameter("subscriptionId", LanguageConstants.String, "The subscription ID")
+                .WithRequiredParameter("resourceType", LanguageConstants.String, "Type of resource including resource provider namespace")
+                .WithVariableParameter("resourceName", LanguageConstants.String, minimumCount: 1, "The resource name segment")
                 .Build();
 
             yield return new FunctionOverloadBuilder("tenantResourceId")
@@ -255,7 +294,7 @@ namespace Bicep.Core.Semantics.Namespaces
                 .Build();
 
             // TODO: return type is string[]
-            // TODO: LOcation param should be of location type if we ever add it
+            // TODO: Location param should be of location type if we ever add it
             yield return new FunctionOverloadBuilder("pickZones")
                 .WithReturnType(LanguageConstants.Array)
                 .WithDescription("Determines whether a resource type supports zones for a region.")
